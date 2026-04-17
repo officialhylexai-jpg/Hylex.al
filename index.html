@@ -10,8 +10,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 
-html,body{
-height:100%;
+html{
 scroll-behavior:smooth;
 }
 
@@ -20,7 +19,7 @@ font-family:Poppins;
 color:white;
 overflow-x:hidden;
 
-/* PREMIUM BG */
+/* CLEAN BG */
 background: radial-gradient(circle at 20% 30%, #0a3d62, #050510 70%);
 background-attachment: fixed;
 }
@@ -36,31 +35,22 @@ z-index:-1;
 /* HERO */
 .hero{
 text-align:center;
-padding:140px 20px 60px;
-animation:fadeUp 1s ease;
+padding:140px 20px 80px;
 }
 
 /* SECTION */
 .section{
 text-align:center;
-padding:80px 20px;
+padding:100px 20px;
 opacity:0;
 transform:translateY(40px);
 transition:0.8s;
 }
 
+/* SHOW */
 .section.show{
 opacity:1;
 transform:translateY(0);
-}
-
-/* BOTTOM FILL SECTION */
-.bottom-fill{
-height:40vh; /* 👈 ये खाली space को stylish बना देगा */
-display:flex;
-align-items:center;
-justify-content:center;
-opacity:0.3;
 }
 
 /* BADGE */
@@ -76,7 +66,7 @@ backdrop-filter:blur(10px);
 }
 
 h1{
-font-size:34px;
+font-size:36px;
 margin-bottom:15px;
 }
 
@@ -107,7 +97,7 @@ box-shadow:0 0 15px #00c6ff55;
 .btn{
 display:inline-block;
 margin:10px;
-padding:10px 20px;
+padding:12px 25px;
 border-radius:30px;
 border:1px solid rgba(255,255,255,0.2);
 color:white;
@@ -120,12 +110,6 @@ transition:0.3s;
 .btn:hover{
 border-color:#00c6ff;
 box-shadow:0 0 15px #00c6ff;
-}
-
-/* ANIMATION */
-@keyframes fadeUp{
-from{opacity:0;transform:translateY(30px);}
-to{opacity:1;transform:translateY(0);}
 }
 
 </style>
@@ -160,11 +144,6 @@ to{opacity:1;transform:translateY(0);}
 <a href="https://instagram.com/flowsync_ai_" target="_blank" class="btn">Instagram</a>
 <a href="mailto:officialhylex.ai@gmail.com" class="btn">Email</a>
 </section>
-
-<!-- SMART BOTTOM FILL -->
-<div class="bottom-fill">
-<p>Scroll Experience</p>
-</div>
 
 <script>
 
@@ -212,17 +191,21 @@ requestAnimationFrame(animate);
 
 animate();
 
-/* SCROLL ANIMATION */
+/* SCROLL FIX (DESKTOP + MOBILE) */
 const sections=document.querySelectorAll('.section');
 
-window.addEventListener('scroll',()=>{
+function showSections(){
 sections.forEach(sec=>{
 const top=sec.getBoundingClientRect().top;
-if(top<window.innerHeight-100){
+if(top < window.innerHeight - 50){
 sec.classList.add('show');
 }
 });
-});
+}
+
+/* RUN ON LOAD + SCROLL */
+window.addEventListener('scroll', showSections);
+window.addEventListener('load', showSections);
 
 </script>
 

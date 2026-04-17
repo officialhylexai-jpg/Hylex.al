@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
 font-family:Poppins;
@@ -17,80 +16,44 @@ color:white;
 overflow-x:hidden;
 }
 
-/* GRADIENT BACKGROUND */
+/* BACKGROUND GLOW */
 body::before{
 content:'';
 position:fixed;
-width:600px;
-height:600px;
-background:radial-gradient(circle,#00c6ff33,transparent);
+width:500px;
+height:500px;
+background:#00c6ff33;
+filter:blur(120px);
 top:-100px;
 left:-100px;
-filter:blur(120px);
-animation:move1 10s infinite alternate;
 }
-
 body::after{
 content:'';
 position:fixed;
 width:500px;
 height:500px;
-background:radial-gradient(circle,#8a5cff33,transparent);
+background:#8a5cff33;
+filter:blur(120px);
 bottom:-100px;
 right:-100px;
-filter:blur(120px);
-animation:move2 12s infinite alternate;
 }
 
-@keyframes move1{
-0%{transform:translate(0,0)}
-100%{transform:translate(200px,200px)}
-}
-
-@keyframes move2{
-0%{transform:translate(0,0)}
-100%{transform:translate(-200px,-200px)}
-}
-
-/* GLASS CARD */
+/* GLASS */
 .glass{
 background:rgba(255,255,255,0.05);
 backdrop-filter:blur(15px);
 border:1px solid rgba(255,255,255,0.1);
 border-radius:20px;
-padding:25px;
-transition:0.4s;
-}
-
-.glass:hover{
-transform:translateY(-8px) scale(1.02);
-border-color:#00c6ff;
+padding:20px;
 }
 
 /* HERO */
 .hero{
 text-align:center;
-padding:120px 20px;
+padding:100px 20px;
 }
 
-h1{
-font-size:40px;
-margin-bottom:15px;
-}
-
-p{
-opacity:0.8;
-}
-
-/* SERVICES */
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:25px;
-padding:40px;
-}
-
-/* BUTTONS */
+/* BUTTON */
 .btn{
 display:inline-block;
 margin:10px;
@@ -98,40 +61,42 @@ padding:12px 25px;
 border-radius:30px;
 text-decoration:none;
 color:white;
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(10px);
-border:1px solid rgba(255,255,255,0.2);
-transition:0.3s;
+border:1px solid #333;
 }
-
 .btn:hover{
 background:#00c6ff;
-transform:scale(1.05);
-box-shadow:0 0 20px #00c6ff;
 }
 
-/* SCROLL ANIMATION */
-.fade{
-opacity:0;
-transform:translateY(40px);
-transition:1s;
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+padding:40px;
 }
 
-.fade.show{
-opacity:1;
-transform:translateY(0);
+/* DASHBOARD */
+.dashboard{
+padding:40px;
 }
 
-/* CURSOR GLOW */
-.cursor{
-position:fixed;
-width:20px;
-height:20px;
-background:#00c6ff;
-border-radius:50%;
-pointer-events:none;
-filter:blur(10px);
-z-index:999;
+.stat{
+font-size:28px;
+font-weight:bold;
+}
+
+/* CHAT */
+.chat{
+margin-top:20px;
+text-align:left;
+font-size:14px;
+}
+
+.msg{
+margin:10px 0;
+padding:10px;
+border-radius:10px;
+background:#111;
 }
 
 .section{
@@ -144,33 +109,59 @@ text-align:center;
 
 <body>
 
-<div class="cursor"></div>
-
 <!-- HERO -->
-<section class="hero fade">
+<section class="hero">
 <h1>HYLEX</h1>
-
 <p>Automate • Scale • Profit</p>
 <p><b>Results > Promises. I show working demos before payment.</b></p>
-
 </section>
 
 <!-- SERVICES -->
-<section class="section fade">
+<section class="section">
 <h2>What I Do</h2>
 
-<div class="cards">
-
+<div class="grid">
 <div class="glass">Make.com Automation</div>
 <div class="glass">AI Workflow Systems</div>
 <div class="glass">Modern 3D Websites</div>
+</div>
 
+</section>
+
+<!-- FAKE DASHBOARD -->
+<section class="section dashboard">
+<h2>Live AI System Demo</h2>
+
+<div class="grid">
+
+<div class="glass">
+Leads Generated
+<div class="stat" id="leads">0</div>
+</div>
+
+<div class="glass">
+Conversions
+<div class="stat" id="sales">0</div>
+</div>
+
+<div class="glass">
+Response Rate
+<div class="stat" id="response">0%</div>
+</div>
+
+</div>
+
+<!-- CHATBOT UI -->
+<div class="glass chat">
+<div class="msg">User: I want more leads</div>
+<div class="msg">Bot: I automated your funnel 🚀</div>
+<div class="msg">User: Wow conversion increased!</div>
 </div>
 
 </section>
 
 <!-- CONTACT -->
-<section class="section fade">
+<section class="section">
 <h2>Contact Me</h2>
 
 <a href="https://t.me/smartflowhiren" target="_blank" class="btn">Telegram</a>
@@ -181,25 +172,19 @@ text-align:center;
 
 <script>
 
-/* SCROLL ANIMATION */
-const fades = document.querySelectorAll('.fade');
+/* FAKE DASHBOARD ANIMATION */
+let leads=0,sales=0,response=0;
 
-window.addEventListener('scroll',()=>{
-fades.forEach(el=>{
-const top = el.getBoundingClientRect().top;
-if(top < window.innerHeight - 100){
-el.classList.add('show');
-}
-});
-});
+setInterval(()=>{
+leads+=Math.floor(Math.random()*10);
+sales+=Math.floor(Math.random()*3);
+response=Math.min(100,response+5);
 
-/* CURSOR GLOW */
-const cursor = document.querySelector(".cursor");
+document.getElementById("leads").innerText=leads;
+document.getElementById("sales").innerText=sales;
+document.getElementById("response").innerText=response+"%";
 
-document.addEventListener("mousemove",(e)=>{
-cursor.style.top = e.clientY + "px";
-cursor.style.left = e.clientX + "px";
-});
+},1500);
 
 </script>
 

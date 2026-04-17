@@ -9,20 +9,62 @@
 
 <style>
 
+*{margin:0;padding:0;box-sizing:border-box;}
 body{
-margin:0;
 font-family:Poppins;
-background:#0a0a0a;
+background:#050510;
 color:white;
 overflow-x:hidden;
 }
 
-/* BACKGROUND PARTICLES */
-canvas{
+/* GRADIENT BACKGROUND */
+body::before{
+content:'';
 position:fixed;
-top:0;
-left:0;
-z-index:-1;
+width:600px;
+height:600px;
+background:radial-gradient(circle,#00c6ff33,transparent);
+top:-100px;
+left:-100px;
+filter:blur(120px);
+animation:move1 10s infinite alternate;
+}
+
+body::after{
+content:'';
+position:fixed;
+width:500px;
+height:500px;
+background:radial-gradient(circle,#8a5cff33,transparent);
+bottom:-100px;
+right:-100px;
+filter:blur(120px);
+animation:move2 12s infinite alternate;
+}
+
+@keyframes move1{
+0%{transform:translate(0,0)}
+100%{transform:translate(200px,200px)}
+}
+
+@keyframes move2{
+0%{transform:translate(0,0)}
+100%{transform:translate(-200px,-200px)}
+}
+
+/* GLASS CARD */
+.glass{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.1);
+border-radius:20px;
+padding:25px;
+transition:0.4s;
+}
+
+.glass:hover{
+transform:translateY(-8px) scale(1.02);
+border-color:#00c6ff;
 }
 
 /* HERO */
@@ -31,41 +73,24 @@ text-align:center;
 padding:120px 20px;
 }
 
-.badge{
-background:#111;
-padding:6px 15px;
-border-radius:20px;
-display:inline-block;
-margin-bottom:20px;
-border:1px solid #333;
+h1{
+font-size:40px;
+margin-bottom:15px;
 }
 
-h2{
-font-size:38px;
+p{
+opacity:0.8;
 }
 
 /* SERVICES */
 .cards{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
 padding:40px;
 }
 
-.card{
-background:#111;
-padding:25px;
-border-radius:15px;
-border:1px solid #222;
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateY(-5px);
-border-color:#555;
-}
-
-/* CONTACT BUTTONS */
+/* BUTTONS */
 .btn{
 display:inline-block;
 margin:10px;
@@ -73,13 +98,40 @@ padding:12px 25px;
 border-radius:30px;
 text-decoration:none;
 color:white;
-border:1px solid #444;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,0.2);
 transition:0.3s;
 }
 
 .btn:hover{
-border-color:#8a5cff;
-box-shadow:0 0 10px #8a5cff;
+background:#00c6ff;
+transform:scale(1.05);
+box-shadow:0 0 20px #00c6ff;
+}
+
+/* SCROLL ANIMATION */
+.fade{
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+}
+
+.fade.show{
+opacity:1;
+transform:translateY(0);
+}
+
+/* CURSOR GLOW */
+.cursor{
+position:fixed;
+width:20px;
+height:20px;
+background:#00c6ff;
+border-radius:50%;
+pointer-events:none;
+filter:blur(10px);
+z-index:999;
 }
 
 .section{
@@ -92,32 +144,33 @@ text-align:center;
 
 <body>
 
-<canvas id="bg"></canvas>
+<div class="cursor"></div>
 
 <!-- HERO -->
-<section class="hero">
-<div class="badge">AI-Powered Automation Systems</div>
-
-<h2>I Build Systems That Work While You Sleep</h2>
+<section class="hero fade">
+<h1>HYLEX</h1>
 
 <p>Automate • Scale • Profit</p>
 <p><b>Results > Promises. I show working demos before payment.</b></p>
+
 </section>
 
 <!-- SERVICES -->
-<section class="section">
+<section class="section fade">
 <h2>What I Do</h2>
 
 <div class="cards">
-<div class="card">Make.com Automation</div>
-<div class="card">AI Workflow Systems</div>
-<div class="card">Modern 3D Websites</div>
+
+<div class="glass">Make.com Automation</div>
+<div class="glass">AI Workflow Systems</div>
+<div class="glass">Modern 3D Websites</div>
+
 </div>
 
 </section>
 
 <!-- CONTACT -->
-<section class="section">
+<section class="section fade">
 <h2>Contact Me</h2>
 
 <a href="https://t.me/smartflowhiren" target="_blank" class="btn">Telegram</a>
@@ -128,45 +181,25 @@ text-align:center;
 
 <script>
 
-/* PARTICLES BACKGROUND */
-const canvas = document.getElementById("bg");
-const ctx = canvas.getContext("2d");
+/* SCROLL ANIMATION */
+const fades = document.querySelectorAll('.fade');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-for(let i=0;i<60;i++){
-particles.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-r:Math.random()*2,
-dx:(Math.random()-0.5),
-dy:(Math.random()-0.5)
-});
+window.addEventListener('scroll',()=>{
+fades.forEach(el=>{
+const top = el.getBoundingClientRect().top;
+if(top < window.innerHeight - 100){
+el.classList.add('show');
 }
-
-function animate(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-
-particles.forEach(p=>{
-p.x+=p.dx;
-p.y+=p.dy;
-
-if(p.x<0||p.x>canvas.width) p.dx*=-1;
-if(p.y<0||p.y>canvas.height) p.dy*=-1;
-
-ctx.beginPath();
-ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-ctx.fillStyle="#8a5cff";
-ctx.fill();
+});
 });
 
-requestAnimationFrame(animate);
-}
+/* CURSOR GLOW */
+const cursor = document.querySelector(".cursor");
 
-animate();
+document.addEventListener("mousemove",(e)=>{
+cursor.style.top = e.clientY + "px";
+cursor.style.left = e.clientX + "px";
+});
 
 </script>
 

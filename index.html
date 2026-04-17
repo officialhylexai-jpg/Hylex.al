@@ -10,13 +10,21 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 
+html,body{
+height:100%;
+}
+
 body{
 font-family:Poppins;
 color:white;
 overflow-x:hidden;
+min-height:100vh;
+display:flex;
+flex-direction:column;
 
-/* BLUE GRADIENT BACKGROUND */
-background: radial-gradient(circle at 20% 30%, #0a3d62, #050510 60%);
+/* SINGLE CLEAN BLUE BACKGROUND */
+background: radial-gradient(circle at 20% 30%, #0a3d62, #050510 70%);
+background-attachment: fixed;
 }
 
 /* PARTICLES */
@@ -30,17 +38,18 @@ z-index:-1;
 /* HERO */
 .hero{
 text-align:center;
-padding:160px 20px 80px; /* 👈 नीचे push किया */
+padding:140px 20px 60px;
 }
 
 .badge{
 display:inline-block;
 padding:6px 15px;
 border-radius:20px;
-border:1px solid #333;
+border:1px solid rgba(255,255,255,0.2);
 margin-bottom:20px;
 font-size:14px;
 background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
 }
 
 h1{
@@ -51,7 +60,13 @@ margin-bottom:15px;
 /* SECTION */
 .section{
 text-align:center;
-padding:80px 20px; /* 👈 spacing बढ़ाई */
+padding:70px 20px;
+}
+
+/* LAST SECTION (CONTACT FIX) */
+.section:last-child{
+margin-top:auto;
+padding-bottom:120px;
 }
 
 /* CARDS */
@@ -143,12 +158,16 @@ box-shadow:0 0 15px #00c6ff;
 
 <script>
 
-/* PARTICLES */
+/* PARTICLES BACKGROUND */
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
+function resize(){
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
 
 let particles=[];
 

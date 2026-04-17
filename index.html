@@ -1,179 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HYLEX</title>
+<!-- VIDEO BACKGROUND -->
+<section class="hero">
+  <video autoplay muted loop id="bgVideo" style="position:absolute;width:100%;height:100%;object-fit:cover;z-index:-1;">
+    <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4">
+  </video>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
-<!-- AOS Animation -->
-<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
-<style>
-body {
-  margin:0;
-  font-family:Poppins;
-  background:linear-gradient(-45deg,#0a0a0a,#111,#1a1a2e,#000);
-  background-size:400% 400%;
-  animation:bg 10s infinite;
-  color:white;
-  cursor:none;
-}
-
-@keyframes bg {
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
-}
-
-/* Cursor */
-.cursor {
-  width:20px;
-  height:20px;
-  border:2px solid #8a5cff;
-  border-radius:50%;
-  position:fixed;
-  pointer-events:none;
-  transform:translate(-50%,-50%);
-  transition:0.1s;
-  z-index:999;
-}
-
-/* Header */
-header {
-  display:flex;
-  justify-content:space-between;
-  padding:20px 50px;
-}
-
-header h1 {
-  color:#8a5cff;
-}
-
-/* Hero */
-.hero {
-  text-align:center;
-  padding:120px 20px;
-}
-
-.badge {
-  background:linear-gradient(90deg,#00c6ff,#8a5cff);
-  display:inline-block;
-  padding:6px 15px;
-  border-radius:20px;
-  margin-bottom:20px;
-}
-
-.hero h2 {
-  font-size:42px;
-}
-
-.btn {
-  background:linear-gradient(90deg,#00c6ff,#8a5cff);
-  padding:12px 25px;
-  border-radius:30px;
-  text-decoration:none;
-  color:white;
-  display:inline-block;
-  margin-top:20px;
-}
-
-/* Cards */
-.cards {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:20px;
-  padding:40px;
-}
-
-.card {
-  background:#111;
-  padding:30px;
-  border-radius:20px;
-  transition:0.4s;
-  transform-style:preserve-3d;
-}
-
-.card:hover {
-  transform:rotateY(10deg) rotateX(10deg) scale(1.05);
-  box-shadow:0 0 30px rgba(138,92,255,0.5);
-}
-
-/* Sections */
-.section {
-  text-align:center;
-  padding:60px 20px;
-}
-
-/* Footer */
-footer {
-  padding:30px;
-  text-align:center;
-  background:#111;
-}
-</style>
-</head>
-
-<body>
-
-<div class="cursor"></div>
-
-<header>
-  <h1>HYLEX</h1>
-</header>
-
-<section class="hero" data-aos="fade-up">
   <div class="badge">AI-Powered Automation Systems</div>
   <h2>I Build Systems That Work While You Sleep</h2>
   <p>Automate • Scale • Profit</p>
-  <p><strong>Results > Promises. I show working demos before payment.</strong></p>
   <a href="https://t.me/smartflowhiren" class="btn">Get Demo</a>
 </section>
 
-<section class="section" data-aos="fade-up">
-  <h2>What I Do</h2>
-  <div class="cards">
-    <div class="card">Make.com Automation</div>
-    <div class="card">AI Workflow Systems</div>
-    <div class="card">Lead Generation</div>
-    <div class="card">Modern 3D Websites</div>
+<!-- DASHBOARD DEMO -->
+<section class="section">
+  <h2>Live System Preview</h2>
+  <div class="card" style="max-width:500px;margin:auto;">
+    <p>Leads Captured: <span id="leads">0</span></p>
+    <p>Automation Running...</p>
   </div>
 </section>
 
-<section class="section" data-aos="fade-up">
-  <h2>Who I Work With</h2>
-  <p>Startups • Agencies • E-commerce • Global Clients</p>
+<!-- CHATBOT -->
+<div id="chatbot" style="position:fixed;bottom:20px;right:20px;background:#111;padding:15px;border-radius:15px;width:250px;">
+  <p><strong>HYLEX Bot 🤖</strong></p>
+  <p id="chatText">Hi! Want to see automation demo?</p>
+  <button onclick="reply()" class="btn">Yes</button>
+</div>
+
+<!-- PRICING -->
+<section class="section">
+  <h2>Pricing</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Starter</h3>
+      <p>Basic Automation</p>
+      <p>₹4,999</p>
+    </div>
+    <div class="card">
+      <h3>Pro</h3>
+      <p>Full AI System</p>
+      <p>₹9,999</p>
+    </div>
+    <div class="card">
+      <h3>Custom</h3>
+      <p>Advanced Workflows</p>
+      <p>Contact Me</p>
+    </div>
+  </div>
 </section>
 
-<section class="section" data-aos="fade-up">
-  <h2>About Me</h2>
-  <p>Hi, I’m Hiren (HYLEX). I build AI automation systems for businesses worldwide.</p>
-</section>
-
-<section class="section" data-aos="fade-up">
-  <h2>Contact</h2>
-  <p>Email: officialhylex.ai@gmail.com</p>
-  <p>Instagram: flowsync_ai_</p>
-  <a href="https://t.me/smartflowhiren" class="btn">Message on Telegram</a>
-</section>
-
-<footer>
-  © HYLEX 2026
-</footer>
-
-<!-- Scripts -->
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script>
-AOS.init();
+// Fake Leads Counter
+let count = 0;
+setInterval(()=>{
+  count += Math.floor(Math.random()*3);
+  document.getElementById("leads").innerText = count;
+},2000);
 
-// Cursor effect
-const cursor = document.querySelector(".cursor");
-document.addEventListener("mousemove", e => {
-  cursor.style.top = e.clientY + "px";
-  cursor.style.left = e.clientX + "px";
-});
+// Chatbot
+function reply(){
+  document.getElementById("chatText").innerText = "Great! Message me on Telegram 🚀";
+}
 </script>
-
-</body>
-</html>

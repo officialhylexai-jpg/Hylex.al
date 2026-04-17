@@ -16,7 +16,6 @@ background-size:400% 400%;
 animation:bg 10s infinite;
 color:white;
 overflow-x:hidden;
-cursor:none;
 }
 
 @keyframes bg{
@@ -25,29 +24,7 @@ cursor:none;
 100%{background-position:0%}
 }
 
-/* Cursor */
-.cursor{
-width:20px;height:20px;
-border:2px solid #8a5cff;
-border-radius:50%;
-position:fixed;
-pointer-events:none;
-z-index:999;
-}
-
-/* Floating Icons */
-.float{
-position:fixed;
-animation:float 6s infinite ease-in-out;
-opacity:0.2;
-}
-@keyframes float{
-0%{transform:translateY(0)}
-50%{transform:translateY(-20px)}
-100%{transform:translateY(0)}
-}
-
-/* Hero */
+/* HERO */
 .hero{
 text-align:center;
 padding:120px 20px;
@@ -62,10 +39,10 @@ margin-bottom:20px;
 }
 
 h2{
-font-size:40px;
+font-size:38px;
 }
 
-/* Buttons */
+/* BUTTON */
 .btn{
 background:linear-gradient(90deg,#00c6ff,#8a5cff);
 padding:12px 25px;
@@ -73,15 +50,15 @@ border-radius:30px;
 color:white;
 text-decoration:none;
 display:inline-block;
-margin-top:20px;
+margin:10px;
 transition:0.3s;
 }
 .btn:hover{
-transform:scale(1.1);
+transform:scale(1.08);
 box-shadow:0 0 20px rgba(138,92,255,0.7);
 }
 
-/* Cards */
+/* CARDS */
 .cards{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
@@ -93,42 +70,36 @@ padding:40px;
 background:#111;
 padding:25px;
 border-radius:20px;
-transition:0.4s;
-}
-.card:hover{
-transform:scale(1.05);
-box-shadow:0 0 30px rgba(138,92,255,0.5);
+position:relative;
+overflow:hidden;
 }
 
-/* Section */
+/* BORDER GLOW EFFECT */
+.card::before{
+content:'';
+position:absolute;
+top:-2px;
+left:-2px;
+right:-2px;
+bottom:-2px;
+background:linear-gradient(45deg,#00c6ff,#8a5cff,#00c6ff);
+z-index:-1;
+filter:blur(10px);
+opacity:0;
+transition:0.4s;
+}
+.card:hover::before{
+opacity:1;
+}
+
+.card:hover{
+transform:scale(1.05);
+}
+
+/* SECTION */
 .section{
 padding:60px 20px;
 text-align:center;
-}
-
-/* Chatbot */
-#chatbot{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#111;
-padding:15px;
-border-radius:15px;
-width:250px;
-}
-
-/* Testimonials */
-.testimonial{
-background:#111;
-padding:20px;
-margin:10px;
-border-radius:15px;
-}
-
-/* Typing */
-#typing{
-border-right:2px solid white;
-display:inline;
 }
 
 </style>
@@ -136,89 +107,54 @@ display:inline;
 
 <body>
 
-<div class="cursor"></div>
-
-<!-- FLOATING ICONS -->
-<div class="float" style="top:10%;left:10%;">⚙️</div>
-<div class="float" style="top:70%;left:80%;">🤖</div>
-<div class="float" style="top:40%;left:60%;">📊</div>
-
 <!-- HERO -->
 <section class="hero">
 <div class="badge">AI-Powered Automation Systems</div>
 
-<h2>I Build Systems That <span id="typing"></span></h2>
+<h2>I Build Systems That Work While You Sleep</h2>
 
 <p>Automate • Scale • Profit</p>
 <p><b>Results > Promises. I show working demos before payment.</b></p>
 
-<a href="https://t.me/smartflowhiren" class="btn">🚀 Get Demo</a>
+<a href="https://t.me/smartflowhiren" target="_blank" class="btn">🚀 Telegram</a>
+<a href="https://instagram.com/flowsync_ai_" target="_blank" class="btn">📸 Instagram</a>
+<a href="mailto:officialhylex.ai@gmail.com" class="btn">✉️ Email</a>
+
 </section>
 
 <!-- SERVICES -->
 <section class="section">
 <h2>What I Do</h2>
+
 <div class="cards">
 <div class="card">Make.com Automation</div>
 <div class="card">AI Workflow Systems</div>
-<div class="card">Lead Generation</div>
 <div class="card">Modern 3D Websites</div>
 </div>
+
 </section>
 
 <!-- DASHBOARD -->
 <section class="section">
 <h2>Live System Preview</h2>
+
 <div class="card">
 Leads Generated: <span id="leads">0</span>
 </div>
+
 </section>
 
 <!-- TESTIMONIALS -->
 <section class="section">
 <h2>Client Results</h2>
-<div class="testimonial">"Increased leads by 3x 🚀"</div>
-<div class="testimonial">"Automation saved 20+ hours/week"</div>
-<div class="testimonial">"Best AI system provider"</div>
-</section>
 
-<!-- CONTACT -->
-<section class="section">
-<h2>Contact Me</h2>
-
-<a href="https://t.me/smartflowhiren" class="btn">Telegram</a>
-<a href="https://www.instagram.com/flowsync_ai_/" class="btn">Instagram</a>
-<a href="mailto:officialhylex.ai@gmail.com" class="btn">Email</a>
+<div class="card">"Increased leads by 3x 🚀"</div>
+<div class="card">"Automation saved 20+ hours/week"</div>
+<div class="card">"Best AI system provider"</div>
 
 </section>
-
-<!-- CHATBOT -->
-<div id="chatbot">
-<b>HYLEX Bot 🤖</b>
-<p id="chatText">Want to see live demo?</p>
-<button onclick="reply()" class="btn">Yes</button>
-</div>
 
 <script>
-
-/* Cursor */
-const cursor=document.querySelector(".cursor");
-document.addEventListener("mousemove",e=>{
-cursor.style.top=e.clientY+"px";
-cursor.style.left=e.clientX+"px";
-});
-
-/* Typing */
-let text="Work While You Sleep";
-let i=0;
-function typing(){
-if(i<text.length){
-document.getElementById("typing").innerHTML+=text.charAt(i);
-i++;
-setTimeout(typing,50);
-}
-}
-typing();
 
 /* Leads Counter */
 let count=0;
@@ -226,11 +162,6 @@ setInterval(()=>{
 count+=Math.floor(Math.random()*5);
 document.getElementById("leads").innerText=count;
 },2000);
-
-/* Chatbot */
-function reply(){
-document.getElementById("chatText").innerText="Message me on Telegram 🚀";
-}
 
 </script>
 
